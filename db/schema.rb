@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_05_215516) do
+ActiveRecord::Schema.define(version: 2021_08_10_214808) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 2021_07_05_215516) do
     t.bigint "customer_id"
     t.bigint "parent_transaction_id"
     t.bigint "card_id", null: false
-    t.string "type", null: false
+    t.string "transaction_type", null: false
     t.string "currency", limit: 3, null: false
     t.integer "amount"
     t.datetime "created_at", null: false
