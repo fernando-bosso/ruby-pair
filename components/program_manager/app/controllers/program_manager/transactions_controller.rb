@@ -1,7 +1,11 @@
 module ProgramManager
   class TransactionsController < ActionController::API
-    def transactions
+    def index
+      render json: Transaction.all
+    end
 
+    def show
+      render json: Transaction.find(params[:id])
     end
   end
 end
