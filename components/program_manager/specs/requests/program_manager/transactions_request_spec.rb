@@ -4,13 +4,7 @@ RSpec.describe '/api/transactions', type: :request do
   describe '.show' do
     subject(:show_transaction) { get "/api/transactions/#{transaction.id}" }
 
-    let(:transaction) do
-      ProgramManager::Transaction.create!(
-        card_id: 1,
-        transaction_type: 'authorization',
-        currency: '$'
-      )
-    end
+    let(:transaction) { create(:transaction) }
 
     it 'has status ok' do
       show_transaction
@@ -27,27 +21,9 @@ RSpec.describe '/api/transactions', type: :request do
 
   describe '.index' do
     subject(:index_transactions) { get "/api/transactions/" }
-
-    let(:first_transaction) do
-      ProgramManager::Transaction.create!(
-        amount: 321,
-        card_id: 1,
-        transaction_type: 'authorization',
-        currency: '$'
-      )
-    end
-
-    let(:second_transaction) do
-      ProgramManager::Transaction.create!(
-        amount: 123,
-        card_id: 2,
-        transaction_type: 'authorization',
-        currency: '$'
-      )
-    end
-
+    
     let!(:transactions) do
-      [first_transaction, second_transaction]
+      create_list(:transaction, 2)
     end
 
     it 'has status ok' do
