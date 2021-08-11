@@ -4,5 +4,10 @@ module ProgramManager
 
     belongs_to :card
     belongs_to :customer
+    belongs_to :parent_transaction,
+      optional: true, class_name: 'Transaction', foreign_key: 'parent_transaction_id'
+
+    has_many :child_transactions,
+      dependent: :restrict_with_error, class_name: 'Transaction', foreign_key: 'parent_transaction_id'
   end
 end
