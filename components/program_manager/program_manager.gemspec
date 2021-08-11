@@ -13,5 +13,7 @@ Gem::Specification.new do |spec|
   spec.description = "ProgramManager plugin for PayWith services"
   spec.license     = "MIT"
 
+  spec.add_development_dependency 'factory_bot_rails'
+
   spec.files = Dir["{app,config,db,lib}/**/*"]
 end

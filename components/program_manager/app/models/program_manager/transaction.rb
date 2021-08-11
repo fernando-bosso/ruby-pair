@@ -9,5 +9,7 @@ module ProgramManager
 
     has_many :child_transactions,
       dependent: :restrict_with_error, class_name: 'Transaction', foreign_key: 'parent_transaction_id'
+
+    scope :type_authorization, -> { where(transaction_type: 'authorization') }
   end
 end
