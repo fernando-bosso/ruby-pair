@@ -20,6 +20,7 @@ group :development, :test do
   gem "faker", "~> 2.14.0"
   gem 'pry'
   gem 'pry-nav'
+  gem 'webmock'
 end
 
 group :development do

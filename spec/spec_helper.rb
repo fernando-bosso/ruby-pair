@@ -3,6 +3,7 @@
 require "bundler/setup"
 require "factory_bot_rails"
 require "faker"
+require 'webmock/rspec'
 
 RSpec.configure do |config|
   config.before(:suite) do
