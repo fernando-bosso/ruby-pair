@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_10_214808) do
+ActiveRecord::Schema.define(version: 2021_08_12_163711) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,6 +38,9 @@ ActiveRecord::Schema.define(version: 2021_08_10_214808) do
     t.integer "amount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["card_id"], name: "index_program_manager_transactions_on_card_id"
+    t.index ["customer_id"], name: "index_program_manager_transactions_on_customer_id"
+    t.index ["transaction_type"], name: "index_program_manager_transactions_on_transaction_type"
   end
 
 end
