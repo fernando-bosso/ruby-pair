@@ -1,3 +1,4 @@
 --require rails_helper
 --format documentation
 --order random
+--pattern {components/program_manager/specs,spec}/**/*_spec.rb
