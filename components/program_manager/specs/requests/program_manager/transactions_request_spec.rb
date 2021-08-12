@@ -75,6 +75,9 @@ RSpec.describe '/api/transactions', type: :request do
       let!(:another_customer_transaction) do
         create(:transaction, transaction_type: :authorization)
       end
+      let!(:authorization_from_customer_another_card) do
+        create(:transaction, transaction_type: :authorization, customer: customer, card: create(:card))
+      end
 
       it 'has status ok' do
         show_authorization_transactions
@@ -115,10 +118,13 @@ RSpec.describe '/api/transactions', type: :request do
 
         parsed_response_body = JSON.parse(response.body, symbolize_names: true)
         rendered_transactions = parsed_response_body.dig(:customer, :authorization_transactions)
-        rendered_transaction_ids = rendered_transactions.map { |rt| rt[:id] }
+        rendered_transaction_transaction_types = rendered_transactions.map { |rt| rt[:transaction_type] }
+        rendered_transaction_customer_id = rendered_transactions.map { |rt| rt[:customer_id] }
+        rendered_transaction_card_id = rendered_transactions.map { |rt| rt[:card_id] }
 
-        expect(rendered_transaction_ids).not_to include(not_authorization_transaction.id)
-        expect(rendered_transaction_ids).not_to include(another_customer_transaction.id)
+        expect(rendered_transaction_transaction_types).to all eq('authorization')
+        expect(rendered_transaction_customer_id).to all eq(customer.id)
+        expect(rendered_transaction_card_id).to all eq(card_id)
       end
     end
   end
