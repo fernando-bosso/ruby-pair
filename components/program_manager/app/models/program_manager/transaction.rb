@@ -11,5 +11,12 @@ module ProgramManager
       dependent: :restrict_with_error, class_name: 'Transaction', foreign_key: 'parent_transaction_id'
 
     scope :type_authorization, -> { where(transaction_type: 'authorization') }
+
+    enum transaction_type: {
+      authorization: 'authorization',
+      capture: 'capture',
+      refund: 'refund',
+      purchase: 'purchase'
+    }
   end
 end
