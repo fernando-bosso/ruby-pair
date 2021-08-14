@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_12_163711) do
+ActiveRecord::Schema.define(version: 2021_08_14_124049) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,7 +30,6 @@ ActiveRecord::Schema.define(version: 2021_08_12_163711) do
   end
 
   create_table "program_manager_transactions", force: :cascade do |t|
-    t.bigint "customer_id"
     t.bigint "parent_transaction_id"
     t.bigint "card_id", null: false
     t.string "transaction_type", null: false

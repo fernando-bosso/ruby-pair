@@ -3,7 +3,6 @@
 FactoryBot.define do
   factory :transaction, class: "ProgramManager::Transaction" do
     card
-    customer
 
     currency { '$' }
     transaction_type { 'authorization' }

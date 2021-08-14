@@ -12,7 +12,7 @@ FactoryBot.define do
       with_card
 
       after(:create) do |customer, evaluator|
-        customer.transactions << create_list(:transaction,
+        customer.cards.take.transactions << create_list(:transaction,
                                              2,
                                              transaction_type: 'authorization',
                                              card: customer.cards.take)

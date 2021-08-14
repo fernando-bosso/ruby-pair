@@ -1,5 +1,5 @@
 module ProgramManager
-  class VancouverTimeController < ActionController::API
+  class VancouverTimeController < ProgramManager::BaseApiController
     def now
       render json: TimeClient.time_at('America/Vancouver')
     end

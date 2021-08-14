@@ -63,6 +63,17 @@ RSpec.describe '/api/transactions', type: :request do
       end
     end
 
+    context 'when the card informed does not belong to the customer' do
+      let(:customer) { create(:customer) }
+      let(:card_id) { create(:card).id }
+
+      it 'has status ok' do
+        show_authorization_transactions
+
+        expect(response).to have_http_status :not_found
+      end
+    end
+
     context 'when there are authorization transactions to display' do
       let(:customer) { create(:customer, :with_authorization_transactions) }
       let(:card_id) { customer.cards.first.id }
@@ -108,8 +119,8 @@ RSpec.describe '/api/transactions', type: :request do
 
         expect(parsed_response_body['customer']).to have_key('authorization_transactions')
         expect(authorization_transaction.keys).to include(
-          'amount', 'card_id', 'created_at', 'currency', 'customer_id',
-          'parent_transaction_id', 'transaction_type', 'updated_at'
+          'amount', 'card_id', 'created_at', 'currency', 'parent_transaction_id',
+          'transaction_type', 'updated_at'
         )
       end
 
@@ -119,11 +130,9 @@ RSpec.describe '/api/transactions', type: :request do
         parsed_response_body = JSON.parse(response.body, symbolize_names: true)
         rendered_transactions = parsed_response_body.dig(:customer, :authorization_transactions)
         rendered_transaction_transaction_types = rendered_transactions.map { |rt| rt[:transaction_type] }
-        rendered_transaction_customer_id = rendered_transactions.map { |rt| rt[:customer_id] }
         rendered_transaction_card_id = rendered_transactions.map { |rt| rt[:card_id] }
 
         expect(rendered_transaction_transaction_types).to all eq('authorization')
-        expect(rendered_transaction_customer_id).to all eq(customer.id)
         expect(rendered_transaction_card_id).to all eq(card_id)
       end
     end
