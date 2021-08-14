@@ -39,7 +39,6 @@ ActiveRecord::Schema.define(version: 2021_08_12_163711) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["card_id"], name: "index_program_manager_transactions_on_card_id"
-    t.index ["customer_id"], name: "index_program_manager_transactions_on_customer_id"
     t.index ["transaction_type"], name: "index_program_manager_transactions_on_transaction_type"
   end
 
