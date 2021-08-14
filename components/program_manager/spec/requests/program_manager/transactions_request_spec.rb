@@ -17,6 +17,16 @@ RSpec.describe '/api/transactions', type: :request do
 
       expect(JSON.parse(response.body)).to match(transaction.as_json)
     end
+
+    context 'when the transaction id does not exist' do
+      let(:transaction) { OpenStruct.new(id: 999_999_999_999) }
+
+      it 'has status ok' do
+        show_transaction
+
+        expect(response).to have_http_status(:not_found)
+      end
+    end
   end
 
   describe '.index' do
