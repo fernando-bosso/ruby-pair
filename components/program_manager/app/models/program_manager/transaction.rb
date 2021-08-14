@@ -21,7 +21,7 @@ module ProgramManager
       authorization: 'authorization',
       capture: 'capture',
       refund: 'refund',
-      purchase: 'purchase'
+      void: 'void'
     }
   end
 end
