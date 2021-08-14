@@ -3,13 +3,13 @@ module ProgramManager
     config.generators do |g|
       g.test_framework :rspec
       g.fixture_replacement :factory_bot
-      g.factory_bot dir: ProgramManager::Engine.root.join('specs', 'factories').to_path
+      g.factory_bot dir: "spec/factories"
     end
 
     initializer 'program_manager.factories', after: 'factory_bot.set_factory_paths' do
       if defined?(FactoryBot)
-        FactoryBot.definition_file_paths <<
-          ProgramManager::Engine.root.join('specs', 'factories').to_path
+        FactoryBot.definition_file_paths << File.expand_path('../../spec/factories',
+                                                             __dir__)
       end
     end
 
